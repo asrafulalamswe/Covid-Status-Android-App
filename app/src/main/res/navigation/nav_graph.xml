@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/covidStatusFragment">
+
+    <fragment
+        android:id="@+id/covidStatusFragment"
+        android:name="com.example.labtest4covidstatus.CovidStatusFragment"
+        android:label="fragment_covid_status"
+        tools:layout="@layout/fragment_covid_status" />
+</navigation>
