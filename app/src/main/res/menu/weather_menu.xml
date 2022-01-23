@@ -5,5 +5,8 @@
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
-    
+    <item android:title="My Location"
+        android:id="@+id/item_myLocation"
+        android:icon="@drawable/ic_baseline_my_location_24"
+        app:showAsAction="ifRoom"/>
 </menu>

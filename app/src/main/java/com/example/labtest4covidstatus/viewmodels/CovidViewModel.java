@@ -60,6 +60,4 @@ public class CovidViewModel extends ViewModel {
         return responseInfoLiveData;
     }
 
-
-
 }
