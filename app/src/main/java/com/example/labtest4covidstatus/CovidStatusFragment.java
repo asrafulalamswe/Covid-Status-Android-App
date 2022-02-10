@@ -58,11 +58,10 @@ public class CovidStatusFragment extends Fragment {
         providerClient.getLastLocation()
                 .addOnSuccessListener(location -> {
                     if (location == null) return;
-
                     viewModel.loadData();
                      latitude = location.getLatitude();
                      longitude = location.getLongitude();
-                    Log.e("WeatherApp", "lat: "+latitude+",lon: "+longitude);
+//                    Log.e("WeatherApp", "lat: "+latitude+",lon: "+longitude);
                 });
     }
 
@@ -92,7 +91,6 @@ public class CovidStatusFragment extends Fragment {
                 }
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
@@ -111,15 +109,12 @@ public class CovidStatusFragment extends Fragment {
 
     private String getCity(){
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
-
-
-       String cityName = null;
+        String cityName = null;
         try {
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);;
             if (addresses!=null && addresses.size()>0){
                 cityName = addresses.get(0).getCountryName();
 //                Toast.makeText(getActivity(), ""+cityName, Toast.LENGTH_SHORT).show();
-
             }
         } catch (IOException e) {
             Log.e("testtest", "getCity: "+e.getLocalizedMessage());
@@ -146,7 +141,7 @@ public class CovidStatusFragment extends Fragment {
         }else {
             LocationPermission.requestLocationPermission(launcher);
         }
-        viewModel.setCity(getCity());
+//        viewModel.setCity(getCity());
         viewModel.getResponseInfoLiveData().observe(getViewLifecycleOwner(), covidResponseModel -> {
             binding.countryTV.setText(covidResponseModel.getCountry());
             Picasso.get().load(covidResponseModel.getCountryInfo().getFlag())
@@ -159,6 +154,9 @@ public class CovidStatusFragment extends Fragment {
             binding.totalcaseTV.setText(String.valueOf(covidResponseModel.getCases()));
             binding.totaldeathTV.setText(String.valueOf(covidResponseModel.getDeaths()));
             binding.totalrecoverTodayTV.setText(String.valueOf(covidResponseModel.getRecovered()));
+        });
+        viewModel.getErrorMessageLiveData().observe(getViewLifecycleOwner(), s -> {
+            Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
         });
 
 

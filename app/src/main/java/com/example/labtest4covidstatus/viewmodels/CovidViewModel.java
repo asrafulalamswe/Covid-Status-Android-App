@@ -27,18 +27,17 @@ public class CovidViewModel extends ViewModel {
         fetchResponseData();
     }
 
-
     private void fetchResponseData(){
         final String endUrl = String.format("%s?yesterday=true&strict=true&query", city);
         CovidService.getService().getCurrentData(endUrl).enqueue(new Callback<CovidResponseModel>() {
             @Override
             public void onResponse(Call<CovidResponseModel> call, Response<CovidResponseModel> response) {
                 if (response.code()==200){
-                    Log.e("weather_test", ""+response.code() );
+//                    Log.e("weather_test", ""+response.code() );
                     responseInfoLiveData.postValue(response.body());
                 } else if (response.code() == 404){
-                    errorMessageLiveData.postValue(response.message());
-                    Log.e("weather_test", ""+response.code() );
+                    errorMessageLiveData.postValue("Country Not Found");
+//                    Log.e("weather_test", ""+response.code() );
                 }
             }
 
